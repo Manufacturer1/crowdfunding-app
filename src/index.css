@@ -32,4 +32,11 @@ progress::-webkit-progress-value {
   background-color: hsl(176, 50%, 47%);
   border-radius: 30px;
 }
+.bookmark-icon circle {
+  fill: hsl(0, 0%, 18%); 
+  transition: fill 0.3s ease;
+}
 
+.bookmark-icon:hover circle {
+  fill: hsl(0, 0%, 48%); 
+}
