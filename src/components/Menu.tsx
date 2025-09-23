@@ -11,9 +11,17 @@ const Menu = ({ isOpen, setIsOpen }: PropsType): JSX.Element => {
   return (
     <>
       {isOpen ? (
-        <img onClick={() => setIsOpen(!isOpen)} src={close} />
+        <img
+          className="md:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+          src={close}
+        />
       ) : (
-        <img onClick={() => setIsOpen(!isOpen)} src={hamburger} />
+        <img
+          className="md:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+          src={hamburger}
+        />
       )}
     </>
   );

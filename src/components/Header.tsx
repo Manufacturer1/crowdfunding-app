@@ -1,4 +1,4 @@
-import { useState, type JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
 import desktopHero from "../images/image-hero-desktop.jpg";
 import mobileHero from "../images/image-hero-mobile.jpg";
 import { navbar } from "../data/navbar";
@@ -7,21 +7,40 @@ import Menu from "./Menu";
 
 const Header = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const width = 768;
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > width) {
+        setIsOpen(true);
+        setIsMobile(false);
+      } else {
+        setIsOpen(false);
+        setIsMobile(true);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
 
   return (
     <>
       <header>
-        <div>
+        <div className="absolute z-[-10]">
           <picture>
             <source media="(min-width: 768px)" srcSet={desktopHero} />
             <img className="block w-full" src={mobileHero} alt="Mobile hero" />
           </picture>
         </div>
-        <div className="px-5 py-5 flex justify-between">
-          <div className="absolute top-5 z-20">
-            <img src={logo} alt="logo" />
+        <div className="px-5 py-5 md:px-12 relative z-20 md:flex md:justify-between ">
+          <div>
+            <img className="z-20" src={logo} alt="logo" />
           </div>
-          {isOpen && (
+          {isOpen && isMobile && (
             <nav className="navbar">
               <ul>
                 {navbar.map((link, i) => (
@@ -33,11 +52,21 @@ const Header = (): JSX.Element => {
               </ul>
             </nav>
           )}
+          {!isMobile && (
+            <ul className="flex gap-10 text-white text-medium text-sm ">
+              {navbar.map((link, i) => (
+                <li key={i}>{link}</li>
+              ))}
+            </ul>
+          )}
+
           <div className="absolute top-5 left-[90%] z-20">
             <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>
         </div>
-        {isOpen && <div className="absolute inset-0 bg-black/50 z-10 "></div>}
+        {isOpen && isMobile && (
+          <div className="absolute inset-0 bg-black/50 z-10 "></div>
+        )}
       </header>
     </>
   );
