@@ -25,13 +25,13 @@ const Header = (): JSX.Element => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  });
+  }, []);
 
   return (
     <>
       <header>
-        <div className="absolute z-[-10]">
-          <picture>
+        <div className="absolute z-[-10] top-0 left-0 w-full">
+          <picture className="w-full">
             <source media="(min-width: 768px)" srcSet={desktopHero} />
             <img className="block w-full" src={mobileHero} alt="Mobile hero" />
           </picture>

@@ -5,8 +5,10 @@ export default {
     extend: {
       colors: {
         green: {
-          400: "hsl(176, 50%, 47%)",
-          700: "hsl(176, 72%, 28%)",
+          custom: {
+            400: "hsl(176, 50%, 47%)",
+            700: "hsl(176, 72%, 28%)",
+          },
         },
         gray: {
           custom: {
