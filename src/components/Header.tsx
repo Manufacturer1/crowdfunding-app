@@ -20,6 +20,7 @@ const Header = (): JSX.Element => {
         setIsMobile(true);
       }
     };
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {

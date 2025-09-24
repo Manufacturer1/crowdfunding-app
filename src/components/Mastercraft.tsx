@@ -5,7 +5,7 @@ import BookmarkIcon from "./BookmarkIcon";
 const Mastercraft = (): JSX.Element => {
   return (
     <>
-      <div className="bg-white w-full relative py-5 px-8 shadow-sm rounded-md">
+      <div className="bg-white w-full relative py-5 px-8 shadow-md rounded-md pb-10">
         <div className="absolute w-12 top-[-15%] left-1/2 translate-x-[-50%]">
           <img src={mastercraftLogo} />
         </div>
