@@ -55,7 +55,11 @@ const Header = (): JSX.Element => {
           {!isMobile && (
             <ul className="flex gap-10 text-white text-medium text-sm ">
               {navbar.map((link, i) => (
-                <li key={i}>{link}</li>
+                <li key={i}>
+                  <a className="hover:underline" href="#">
+                    {link}
+                  </a>
+                </li>
               ))}
             </ul>
           )}

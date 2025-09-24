@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 import mastercraftLogo from "../images/logo-mastercraft.svg";
-import bookmark from "../images/icon-bookmark.svg";
+import BookmarkIcon from "./BookmarkIcon";
 
 const Mastercraft = (): JSX.Element => {
   return (
@@ -19,11 +19,14 @@ const Mastercraft = (): JSX.Element => {
           </p>
         </div>
         <div className="flex gap-3 items-center justify-center md:justify-between md:gap-0">
-          <button className="bg-green-custom-400 text-white font-medium text-sm py-3 w-full md:w-auto md:px-8 rounded-full">
+          <button
+            className="bg-green-custom-400 text-white font-medium text-sm py-3 w-full
+           md:w-auto md:px-8 rounded-full hover:bg-green-custom-700 transition-all duration-150"
+          >
             Back this project
           </button>
-          <button className="md:flex md:items-center md:bg-gray-100 md:rounded-full md:gap-4 md:pr-5">
-            <img className="block w-12 " src={bookmark} alt="bookmark" />
+          <button className="md:flex md:items-center md:bg-gray-100 md:rounded-full md:gap-4 md:pr-7 group">
+            <BookmarkIcon />
             <span className="hidden md:block text-gray-custom-500 font-semibold">
               Bookmark
             </span>
