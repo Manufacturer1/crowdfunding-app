@@ -1,8 +1,11 @@
 import type { JSX } from "react";
 import mastercraftLogo from "../images/logo-mastercraft.svg";
 import BookmarkIcon from "./BookmarkIcon";
+import { useBackProject } from "../contexts/BackProjectContext";
 
 const Mastercraft = (): JSX.Element => {
+  const { isModalOpen, setModalOpen } = useBackProject();
+
   return (
     <>
       <div className="bg-white w-full relative py-5 px-8 shadow-md rounded-md pb-10">
@@ -20,6 +23,7 @@ const Mastercraft = (): JSX.Element => {
         </div>
         <div className="flex gap-3 items-center justify-center md:justify-between md:gap-0">
           <button
+            onClick={() => setModalOpen(!isModalOpen)}
             className="bg-green-custom-400 text-white font-medium text-sm py-3 w-full
            md:w-auto md:px-8 rounded-full hover:bg-green-custom-700 transition-all duration-150"
           >

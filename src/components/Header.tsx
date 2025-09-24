@@ -64,13 +64,12 @@ const Header = (): JSX.Element => {
               ))}
             </ul>
           )}
-
           <div className="absolute top-5 left-[90%] z-20">
             <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>
         </div>
         {isOpen && isMobile && (
-          <div className="absolute inset-0 bg-black/50 z-10 "></div>
+          <div className="fixed inset-0 bg-black/50 z-10 "></div>
         )}
       </header>
     </>
