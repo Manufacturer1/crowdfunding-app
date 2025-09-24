@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: "Commissioner", sans-serif;
+}
+li {
+  list-style: none;
+  list-style-type: none;
+}
+
+.navbar {
+  position: absolute;
+  background-color: white;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  border-radius: 10px;
+  z-index: 20;
+}
+.mastercraft-wrapper {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+}
+@media (min-width: 480px) {
+  .mastercraft-wrapper {
+    top: 53%;
+  }
+}
+@media (min-width: 600px) {
+  .mastercraft-wrapper {
+    top: 73%;
+  }
+}
+@media (min-width: 756px) {
+  .mastercraft-wrapper {
+    top: 40%;
+  }
+}
