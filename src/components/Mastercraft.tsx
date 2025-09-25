@@ -4,7 +4,7 @@ import BookmarkIcon from "./BookmarkIcon";
 import { useBackProject } from "../contexts/BackProjectContext";
 
 const Mastercraft = (): JSX.Element => {
-  const { isModalOpen, setModalOpen } = useBackProject();
+  const { isModalOpen, setModalOpen, isBookmarked } = useBackProject();
 
   return (
     <>
@@ -29,12 +29,24 @@ const Mastercraft = (): JSX.Element => {
           >
             Back this project
           </button>
-          <button className="md:flex md:items-center md:bg-gray-100 md:rounded-full md:gap-4 md:pr-7 group">
-            <BookmarkIcon />
-            <span className="hidden md:block text-gray-custom-500 font-semibold">
-              Bookmark
-            </span>
-          </button>
+          {!isBookmarked ? (
+            <button className="md:flex md:items-center md:bg-gray-100 md:rounded-full md:gap-4 md:pr-7 group">
+              <BookmarkIcon />
+              <span className="hidden md:block text-gray-custom-500 font-semibold">
+                Bookmark
+              </span>
+            </button>
+          ) : (
+            <button className="md:flex md:items-center md:bg-gray-100 md:rounded-full md:gap-4 md:pr-7 group">
+              <BookmarkIcon
+                circleStyles={"fill-green-custom-700"}
+                markStyles={"fill-white"}
+              />
+              <span className="hidden md:block text-green-custom-700 font-semibold">
+                Bookmarked
+              </span>
+            </button>
+          )}
         </div>
       </div>
     </>

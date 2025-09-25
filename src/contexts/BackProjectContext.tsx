@@ -13,6 +13,7 @@ export const initialStats: StatsType = {
 
 type BackProjectContextType = {
   isModalOpen: boolean | null;
+  isBookmarked: boolean;
   isSuccesModalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   stats: StatsType;
@@ -23,9 +24,11 @@ type BackProjectContextType = {
   >;
   rewards: RewardPropsType[];
   setIsSuccessModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsBookmarked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const BackProjectContextValue: BackProjectContextType = {
   isModalOpen: false,
+  isBookmarked: false,
   setModalOpen: () => {},
   stats: initialStats,
   updateBackingStats: () => {},
@@ -34,6 +37,7 @@ const BackProjectContextValue: BackProjectContextType = {
   rewards: rewardFromModalData,
   isSuccesModalOpen: false,
   setIsSuccessModalOpen: () => {},
+  setIsBookmarked: () => {},
 };
 
 const BackProjectContext = createContext<BackProjectContextType>(
@@ -53,6 +57,7 @@ export const BackProjectProvider = ({ children }: BackProjectProviderProps) => {
   );
   const [rewards, setRewards] =
     useState<RewardPropsType[]>(rewardFromModalData);
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
 
   const updateBackingStats = (pledgeAmount: number, rewardTitle: string) => {
     setStats((prevStats) => ({
@@ -80,6 +85,7 @@ export const BackProjectProvider = ({ children }: BackProjectProviderProps) => {
     }
     setSelectedReward(null);
     setIsSuccessModalOpen(true);
+    setIsBookmarked(true);
   };
   return (
     <BackProjectContext.Provider
@@ -93,6 +99,8 @@ export const BackProjectProvider = ({ children }: BackProjectProviderProps) => {
         rewards,
         isSuccesModalOpen: isSuccessModalOpen,
         setIsSuccessModalOpen,
+        isBookmarked: isBookmarked,
+        setIsBookmarked,
       }}
     >
       {children}
