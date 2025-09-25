@@ -1,9 +1,28 @@
+import { useBackProject } from "../contexts/BackProjectContext";
+
 type PledgePropsType = {
-  valueInput: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  modalInputValue: string;
+  handleBlur: () => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onContinue: (pledgeAmount: number) => void;
 };
 
-const Pledge = ({ valueInput, setValue }: PledgePropsType) => {
+const Pledge = ({
+  modalInputValue,
+  handleInputChange,
+  handleBlur,
+  onContinue,
+}: PledgePropsType) => {
+  const { setIsSuccessModalOpen } = useBackProject();
+
+  const handleContinue = () => {
+    const pledgeAmount = parseFloat(modalInputValue) || 1;
+    if (pledgeAmount < 1) {
+      return;
+    }
+    onContinue(pledgeAmount);
+    setIsSuccessModalOpen(true);
+  };
   return (
     <div className="px-6 pb-6 md:flex md:items-end md:justify-between">
       <label className="text-center block text-gray-400 font-medium mb-5">
@@ -16,7 +35,9 @@ const Pledge = ({ valueInput, setValue }: PledgePropsType) => {
             $
           </span>
           <input
-            value={valueInput}
+            value={modalInputValue}
+            onChange={handleInputChange}
+            onBlur={handleBlur}
             type="number"
             className="rounded-full w-[110px] md:w-[120px] py-3 outline-none border-2 border-solid
              border-gray-200 pl-10 pr-5 hover:border-green-custom-400 focus:border-green-custom-400 transition-all duration-200 text-black font-bold
@@ -26,6 +47,8 @@ const Pledge = ({ valueInput, setValue }: PledgePropsType) => {
           />
         </div>
         <button
+          onClick={handleContinue}
+          disabled={parseFloat(modalInputValue) < 1}
           className="basis-[50%] w-[110px] md:w-[120px] py-3
          text-white bg-green-custom-400 rounded-full
           hover:bg-green-custom-700 transition-all duration-200"

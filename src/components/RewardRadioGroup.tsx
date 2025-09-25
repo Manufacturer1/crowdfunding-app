@@ -1,15 +1,13 @@
 import { RadioGroup, Radio, Field } from "@headlessui/react";
-import { rewardFromModalData } from "../data/reward";
-import { useState } from "react";
-import type { RewardPropsType } from "./Reward";
 import RewardModal from "./RewardModal";
+import { useBackProject } from "../contexts/BackProjectContext";
 
 const RewardRadioGroup = () => {
-  const [selected, setSelected] = useState<RewardPropsType | null>(null);
+  const { selectedReward, setSelectedReward, rewards } = useBackProject();
 
   return (
-    <RadioGroup value={selected} onChange={setSelected}>
-      {rewardFromModalData.map((data, idx) => (
+    <RadioGroup value={selectedReward} onChange={setSelectedReward}>
+      {rewards.map((data, idx) => (
         <Field key={idx} className="mb-3 flex items-center gap-3">
           <Radio
             value={data}

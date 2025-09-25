@@ -1,6 +1,7 @@
 import type { RewardPropsType } from "./Reward";
 import Pledge from "./Pledge";
-import { useState } from "react";
+import { usePledgeInput } from "../hooks/usePledgeInput";
+import { useBackProject } from "../contexts/BackProjectContext";
 
 const RewardModal = ({
   title,
@@ -8,7 +9,13 @@ const RewardModal = ({
   description,
   amount,
 }: RewardPropsType) => {
-  const [value, setValue] = useState<string>(pledge);
+  const { value, handleInputChange, handleBlur } = usePledgeInput(pledge);
+  const { updateBackingStats } = useBackProject();
+
+  const handleContinue = (pledgeAmount: number) => {
+    updateBackingStats(pledgeAmount, title);
+  };
+
   return (
     <div
       className={`relative border-2 border-gray-300 rounded-md w-full shadow-sm transition
@@ -19,9 +26,11 @@ const RewardModal = ({
       <div className={`p-6 md:pb-7`}>
         {/*Outer dot*/}
         <span
-          className="absolute left-4 top-6 flex size-6
+          className={`absolute left-4 top-6 flex size-6
          items-center justify-center rounded-full border-2
-          border-gray-200 bg-white group-hover:border-green-custom-400"
+          border-gray-200 bg-white ${
+            amount !== "0" ? "group-hover:border-green-custom-400" : ""
+          } `}
         >
           {/*Inner dot*/}
           <span className="size-3 rounded-full bg-teal-400 opacity-0 group-data-[checked]:opacity-100 transition" />
@@ -30,8 +39,12 @@ const RewardModal = ({
         <div className="ml-8 flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="md:flex md:items-center md:gap-4">
             <h3
-              className="font-bold text-black text-base
-             group-hover:text-green-custom-400 transition-all duration-150"
+              className={`font-bold text-black text-base
+             ${
+               amount !== "0"
+                 ? "group-hover:text-green-custom-400 transition-all duration-150"
+                 : ""
+             } `}
             >
               {title}
             </h3>
@@ -63,7 +76,12 @@ const RewardModal = ({
       {!title.toLowerCase().includes("no reward") && (
         <div className="group-data-[checked]:block hidden">
           <hr className="mb-5 relative border-1 border-gray-300" />
-          <Pledge valueInput={value} setValue={setValue} />
+          <Pledge
+            handleBlur={handleBlur}
+            modalInputValue={value}
+            handleInputChange={handleInputChange}
+            onContinue={handleContinue}
+          />
         </div>
       )}
     </div>
