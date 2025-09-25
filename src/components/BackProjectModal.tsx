@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useBackProject } from "../contexts/BackProjectContext";
 import close from "../images/icon-close-modal.svg";
-import { RadioGroup, Radio } from "@headlessui/react";
-import { rewardFromModalData } from "../data/reward";
+import RewardRadioGroup from "./RewardRadioGroup";
 
 const BackProjectModal = () => {
   const { isModalOpen, setModalOpen } = useBackProject();
+
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
@@ -40,11 +40,7 @@ const BackProjectModal = () => {
               Want to support us in bringing Mastercraft Bamboo Monitor Riser
               out in the world?
             </p>
-            <RadioGroup value={0}>
-              {rewardFromModalData.map((data, index) => (
-                <Radio key={index} value={data.title}></Radio>
-              ))}
-            </RadioGroup>
+            <RewardRadioGroup />
           </div>
         </div>
       )}

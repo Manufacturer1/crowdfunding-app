@@ -30,7 +30,7 @@ to our Backer member list. Shipping is included.",
 export const rewardFromModalData: RewardPropsType[] = [
   {
     title: "Pledge with no reward",
-    pledge: null,
+    pledge: "",
     description:
       "Choose to support us without a reward if you simply believe in our project. As a backer, \
   you will be signed up to receive product updates via email.",

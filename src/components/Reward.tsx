@@ -1,8 +1,8 @@
 export type RewardPropsType = {
-  title: String;
-  pledge: String | null;
-  description: String;
-  amount: String | null;
+  title: string;
+  pledge: string;
+  description: string;
+  amount: string | null;
 };
 
 const Reward = ({ title, pledge, description, amount }: RewardPropsType) => {
