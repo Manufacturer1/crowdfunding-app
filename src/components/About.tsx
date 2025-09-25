@@ -1,7 +1,8 @@
 import Reward from "./Reward";
-import { rewardData } from "../data/reward";
+import { useBackProject } from "../contexts/BackProjectContext";
 
 const About = () => {
+  const { rewards } = useBackProject();
   return (
     <>
       <div className="bg-white w-full relative py-7 px-8 shadow-md rounded-md pb-10">
@@ -24,15 +25,18 @@ const About = () => {
         </div>
         {/*Rewards*/}
         <div className="space-y-5">
-          {rewardData.map((data, index) => (
-            <Reward
-              key={index}
-              title={data.title}
-              pledge={data.pledge}
-              description={data.description}
-              amount={data.amount}
-            />
-          ))}
+          {rewards.map(
+            (data, index) =>
+              index !== 0 && (
+                <Reward
+                  key={index}
+                  title={data.title}
+                  pledge={data.pledge}
+                  description={data.description}
+                  amount={data.amount}
+                />
+              )
+          )}
         </div>
       </div>
     </>

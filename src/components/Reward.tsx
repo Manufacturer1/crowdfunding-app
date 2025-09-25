@@ -1,11 +1,26 @@
+import { useBackProject } from "../contexts/BackProjectContext";
+
 export type RewardPropsType = {
-  title: String;
-  pledge: String | null;
-  description: String;
-  amount: String | null;
+  title: string;
+  pledge: string;
+  description: string;
+  amount: string | null;
 };
 
 const Reward = ({ title, pledge, description, amount }: RewardPropsType) => {
+  const { setModalOpen, setSelectedReward } = useBackProject();
+
+  const handleSelectReward = () => {
+    const reward: RewardPropsType = {
+      title: title,
+      pledge: pledge,
+      description: description,
+      amount: amount,
+    };
+    setSelectedReward(reward);
+    setModalOpen(true);
+  };
+
   return (
     <div
       className={`border border-gray-300 rounded-md w-full p-4 pb-8 md:pb-2 shadow-sm ${
@@ -29,6 +44,7 @@ const Reward = ({ title, pledge, description, amount }: RewardPropsType) => {
           </small>
         </div>
         <button
+          onClick={handleSelectReward}
           className={`text-white font-medium py-3 
             px-7 rounded-full
              transition-all duration-200 ${
