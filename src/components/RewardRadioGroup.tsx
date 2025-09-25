@@ -1,12 +1,25 @@
 import { RadioGroup, Radio, Field } from "@headlessui/react";
 import RewardModal from "./RewardModal";
 import { useBackProject } from "../contexts/BackProjectContext";
+import type { RewardPropsType } from "./Reward";
 
 const RewardRadioGroup = () => {
   const { selectedReward, setSelectedReward, rewards } = useBackProject();
 
+  const compareRewards = (
+    a: RewardPropsType | null,
+    b: RewardPropsType | null
+  ): boolean => {
+    if (a === null || b === null) return a === b;
+    return a.title.toLowerCase() === b.title.toLowerCase();
+  };
+
   return (
-    <RadioGroup value={selectedReward} onChange={setSelectedReward}>
+    <RadioGroup
+      by={compareRewards}
+      value={selectedReward}
+      onChange={setSelectedReward}
+    >
       {rewards.map((data, idx) => (
         <Field key={idx} className="mb-3 flex items-center gap-3">
           <Radio
